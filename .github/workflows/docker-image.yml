@@ -5,7 +5,7 @@ on:
   push:
     branches: [ develop ]
   pull_request:
-    branches: [ master ]
+    types: [closed]
 
 jobs:
   
@@ -36,6 +36,9 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: cropped-video-prod
         IMAGE_TAG: ${{ github.sha }}
+        IMAGE_TAG_LATEST: latest
+
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_LATEST .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
