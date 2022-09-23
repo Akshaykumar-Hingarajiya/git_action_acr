@@ -19,8 +19,8 @@ on:
         - prod
 
  
-  push:
-    branches: [ develop ]
+  # push:
+  #   branches: [ develop ]
   # pull_request:
   #   branches:
   #     - master
